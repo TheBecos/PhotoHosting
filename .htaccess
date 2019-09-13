@@ -1,0 +1,23 @@
+AddDefaultCharset UTF-8
+
+php_flag zlib.output_compression On
+php_value zlib.output_compression_level 5
+
+FileETag MTime Size
+<ifmodule mod_expires.c>
+<filesmatch ".(jpg|gif|png|css|js)$">
+ExpiresActive on
+ExpiresDefault "access plus 1 year"
+</filesmatch>
+</ifmodule>
+
+Options -Indexes
+php_value register_globals off
+php_value allow_url_fopen 0
+php_value memory_limit 250M
+
+php_flag display_errors off
+
+#RewriteEngine on
+#RewriteCond %{SERVER_PORT} !443 [NC]
+#RewriteRule ^(.*) https://%{HTTP_HOST}/$1 [R]

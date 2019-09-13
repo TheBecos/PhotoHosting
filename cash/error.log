@@ -1,0 +1,23 @@
+[13-Sep-2019 21:09:28 Europe/Moscow] PHP Notice:  Undefined index: inputfile in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 203
+[13-Sep-2019 21:10:32 Europe/Moscow] PHP Notice:  Undefined index: inputfile in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 203
+[13-Sep-2019 21:15:17 Europe/Moscow] PHP Notice:  Undefined index: inputfile in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 203
+[13-Sep-2019 21:17:47 Europe/Moscow] PHP Notice:  Undefined index: inputfile in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 203
+[13-Sep-2019 21:17:47 Europe/Moscow] PHP Notice:  Undefined index: file in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 203
+[13-Sep-2019 21:19:51 Europe/Moscow] PHP Notice:  Undefined index: file in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 203
+[13-Sep-2019 21:19:51 Europe/Moscow] PHP Notice:  Undefined index: file in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 203
+[13-Sep-2019 21:20:27 Europe/Moscow] PHP Notice:  Undefined index: file in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 203
+[13-Sep-2019 21:20:27 Europe/Moscow] PHP Notice:  Undefined index: file in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 203
+[13-Sep-2019 21:21:35 Europe/Moscow] PHP Notice:  Array to string conversion in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 203
+[13-Sep-2019 21:21:35 Europe/Moscow] PHP Warning:  move_uploaded_file() expects parameter 1 to be string, array given in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 203
+[13-Sep-2019 21:24:32 Europe/Moscow] PHP Notice:  Array to string conversion in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 203
+[13-Sep-2019 21:24:32 Europe/Moscow] PHP Warning:  move_uploaded_file() expects parameter 1 to be string, array given in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 203
+[13-Sep-2019 21:25:36 Europe/Moscow] PHP Notice:  Array to string conversion in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 203
+[13-Sep-2019 21:25:36 Europe/Moscow] PHP Warning:  move_uploaded_file() expects parameter 1 to be string, array given in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 203
+[13-Sep-2019 21:26:46 Europe/Moscow] PHP Warning:  move_uploaded_file() expects parameter 1 to be string, array given in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 203
+[13-Sep-2019 21:27:30 Europe/Moscow] PHP Notice:  Undefined index: files in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 203
+[13-Sep-2019 21:27:30 Europe/Moscow] PHP Notice:  Undefined index: files in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 203
+[13-Sep-2019 21:28:55 Europe/Moscow] PHP Warning:  move_uploaded_file(upload/LR-qkUnplA8.jpg): failed to open stream: No such file or directory in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 203
+[13-Sep-2019 21:28:55 Europe/Moscow] PHP Warning:  move_uploaded_file(): Unable to move 'F:\OpenServer\userdata\temp\phpD1DA.tmp' to 'upload/LR-qkUnplA8.jpg' in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 203
+[13-Sep-2019 21:29:04 Europe/Moscow] PHP Warning:  move_uploaded_file(upload/LR-qkUnplA8.jpg): failed to open stream: No such file or directory in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 203
+[13-Sep-2019 21:29:04 Europe/Moscow] PHP Warning:  move_uploaded_file(): Unable to move 'F:\OpenServer\userdata\temp\phpF36D.tmp' to 'upload/LR-qkUnplA8.jpg' in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 203
+[13-Sep-2019 22:05:35 Europe/Moscow] PHP Notice:  Undefined index: action in F:\OpenServer\domains\PhotoGallery\backend\core\core.photos.php on line 13

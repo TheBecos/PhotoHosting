@@ -1,0 +1,224 @@
+
+.header {
+    background: #F7F7EE;
+    width: 100%;
+    display: block;
+    color: #222;
+    padding: 0;
+    margin: 0;
+}
+
+.header #head {
+    position: relative;
+    display: block;
+    padding: 10px 0 10px 0;
+}
+
+.header .navigation {
+    background: #CFD8DC;
+    background: linear-gradient(180deg, #CFD8DC, var(--gray));
+    display: table;
+    width: 100%;
+}
+
+.header .logo {
+    float: left;
+    padding-left: 1.5vw;
+    padding-top: 0.5vh;
+}
+
+.header .avatar {
+    display: inline;
+    float: right;
+    padding-right: 1em;
+    padding-top: 1em;
+}
+
+.header .avatar--image {
+    display: inline;
+    float: left;
+    margin-right: 10px;
+}
+
+.header .avatar--img {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #E5E5E5;
+    border-radius: 50px;
+    background: url("../images/noavatar.svg") no-repeat;
+    background-size: contain;
+    display: inline-block;
+}
+
+.header .avatar--txt {
+    display: inline;
+    float: right;
+}
+
+.header .actions--photos {
+    display: inline-block;
+    float: right;
+    margin: 0;
+    color: #222;
+    font-size: 1.05em;
+    border: 0;
+    padding: 1.4vh 1vw;
+    text-align: center;
+}
+
+.header .exit-btn {
+    display: inline-block;
+    float: right;
+    margin: 0;
+    color: #222;
+    font-size: 1.05em;
+    border: 0;
+    text-align: center;
+}
+
+.header .exit-btn a {
+    color: #FFF;
+    font-weight: bold;
+}
+
+.header .exit-btn:hover {
+    color: #FFF;
+    cursor: pointer;
+    background: #FFF;
+}
+
+.header .exit-btn a {
+    color: #222;
+    text-decoration: none;
+    padding: 0.67em 1.25em;
+    display: block;
+}
+
+.header .exit-btn a:hover {
+    color: #222;
+    text-decoration: none;
+}
+
+.header .exit-btn span.icn {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    display: block;
+    position: relative;
+}
+
+
+label[for] {
+    cursor: pointer;
+}
+
+.lightbox, .grid {
+    width: 100%;
+    position: fixed;
+    left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-box-align: start;
+    align-items: flex-start;
+    align-content: flex-start;
+    z-index: 0;
+    height: 100%;
+    padding: 16px;
+    overflow: auto;
+    text-align: center;
+    transition: opacity .75s;
+}
+
+.lightbox {
+    z-index: 1;
+    min-height: 100%;
+    overflow: auto;
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+    -webkit-transition: -webkit-transform .5s ease-out;
+    transition: transform .5s ease-out;
+}
+
+/*
+input[type="checkbox"]:checked + .lightbox {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+}
+
+input[type="checkbox"]:checked ~ .grid {
+    opacity: .125;
+}
+*/
+.grid .grid-item {
+    display: inline-block;
+    position: relative;
+    width: 12.5vw;
+    height: 10vw;
+    padding: 15px;
+    opacity: .7;
+    -webkit-transition: opacity .5s;
+    transition: opacity .5s;
+    background-color: white;
+}
+
+.grid .grid-item:not(.add-photo):hover {
+    opacity: 1;
+    background-color: var(--biruza-lite);
+}
+
+.grid img {
+    max-width: 100%;
+    max-height: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.grid .grid-item .visor {
+    position: absolute;
+    height: 0;
+    width: 96%;
+    background: rgba(0, 0, 0, .45);
+    overflow: hidden;
+    text-align: left;
+    top: 0;
+    left: 0;
+    padding: 0 5px;
+    -webkit-transition: height 1s;
+    -moz-transition: height 1s;
+    -o-transition: height 1s;
+    -ms-transition: height 1s;
+    transition: height 1s;
+    color: #fff;
+    line-height: 5vh;
+    font-size: 1.2em;
+}
+
+.grid .grid-item:hover .visor {
+    height: 5vh;
+}
+
+.selPhoto:checked ~ .visor {
+    height: 5vh;
+}
+
+.selPhoto{
+    position: fixed;
+    float: bottom;
+}
+
+.add-btn-photo {
+    background: #FFF !important;
+    border: .1vh dashed var(--black) !important;
+    border-radius: 3vh;
+    color: green !important;
+    padding: 1vw !important;
+    top: 44%;
+    cursor: pointer;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0) !important;
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0) !important;
+    -moz-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0) !important;
+}
+
+.add-btn-photo:hover {
+    background: var(--green-sublite) !important;
+}

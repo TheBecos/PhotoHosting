@@ -1,0 +1,264 @@
+.login--container {
+	display     : table;
+	width       : 100vw;
+	height      : 100vh;
+	padding-top : 100px;
+	box-sizing  : border-box;
+	background  : #ECEFF1;
+}
+.login--container:not(.nobg) {
+	background      : url("/images/bg.jpg") no-repeat center center;
+	background-size : cover;
+}
+
+.login--block {
+	position              : relative;
+	font-size             : 0.95em;
+	color                 : #222;
+	background            : #FFF;
+	width                 : 35em;
+	margin                : 0 auto;
+	padding               : 10px 10px 10px;
+	box-sizing            : border-box;
+	vertical-align        : middle;
+	border                : 0;
+	border-radius         : 10px;
+	-moz-border-radius    : 10px;
+	-webkit-border-radius : 10px;
+	box-shadow            : 0 1px 5px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow    : 0 1px 5px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow       : 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+.login--block .zagolovok {
+	font-size      : 1.6em;
+	font-weight    : 700;
+	color          : #222;
+	text-transform : uppercase;
+	text-align     : center;
+	background     : #FFF;
+	border         : 0;
+	margin         : 10px -10px 30px -10px;
+	padding        : 10px 10px;
+	border-radius  : 1px 1px 0 0;
+}
+.login--block .showpass {
+	position  : absolute;
+	font-size : 1.5em;
+	top       : 15px;
+	right     : 10px;
+}
+.login--block input {
+	height         : 2.5em;
+	width          : 100%;
+	border         : 2px solid var(--blue);
+	font-size      : 1.35em;
+	font-weight    : normal;
+	line-height    : 2.5em;
+	padding        : 5px 10px;
+	color          : #222;
+	background     : rgba(250, 250, 250, 0.3);
+	vertical-align : middle;
+	text-align     : center;
+	outline-style  : none;
+	border-radius  : 5px;
+}
+.login--block input:focus {
+	background         : rgba(59, 110, 170, 0.1);
+	border         : 2px solid var(--blue);
+	color              : #222;
+	transition         : all 300ms ease;
+	-webkit-transition : all 300ms ease;
+	-moz-transition    : all 300ms ease;
+}
+.login--block input.required {
+	border-left : 2px solid #E74C3C;
+}
+.login--block .logo {
+	position   : absolute;
+	top        : -60px;
+	width      : 100%;
+	text-align : center;
+}
+.login--block .copy {
+	position : absolute;
+	bottom   : -25px;
+	left     : 0;
+	color    : #222 !important;
+}
+
+.login--block div.result.green {
+	color : #FFF;
+}
+.login--block .showpass {
+	position  : absolute;
+	font-size : 1.5em;
+	top       : 10px;
+	right     : 10px;
+}
+.login--block .header {
+	color          : #222;
+	font-weight    : 700;
+	text-transform : uppercase;
+}
+.login--block .logo {
+	position   : absolute;
+	top        : -70px;
+	width      : 100%;
+	text-align : center;
+}
+
+a.loginbutton {
+	padding               : 5px 15px 5px 15px;
+	/*height                : 2.5em;*/
+	width                 : 100%;
+	line-height           : 2.5em;
+	font-size             : 1.15em;
+	font-weight           : 700;
+	display               : inline-block;
+	text-align            : center;
+	text-decoration       : none;
+	text-transform        : uppercase;
+	float                 : right;
+	color                 : #FFF;
+	background            : #01579B;
+	border                : 1px solid #01579B;
+	border-radius         : 5px;
+	-moz-border-radius    : 5px;
+	-webkit-border-radius : 5px;
+	box-sizing            : border-box;
+	box-shadow            : 0 14px 10px -10px #01579B !important;
+}
+a.loginbutton:hover {
+	background         : #0288D1;
+	border             : 1px solid #0288D1;
+	color              : #FFF;
+	transition         : all 300ms ease;
+	-webkit-transition : all 300ms ease;
+	-moz-transition    : all 300ms ease;
+}
+a.loginbutton:active {
+	background         : #F1C40F;
+	border             : 1px solid #F39C12;
+	color              : #FFF;
+	transition         : all 100ms linear;
+	-webkit-transition : all 100ms linear;
+	-moz-transition    : all 100ms linear;
+}
+
+.material {
+	position      : relative;
+	padding       : 10px auto !important;
+	margin-top    : 10px;
+	margin-bottom : 10px;
+}
+
+.material input {
+	display : block;
+	padding : 10px;
+	height  : auto;
+}
+
+.material ~ input::placeholder,
+.material input::-webkit-input-placeholder,
+.material input::-moz-placeholder,
+.material input:-moz-placeholder,
+.material input:-ms-input-placeholder {
+	color      : transparent !important;
+	font-size  : 0.8em;
+	text-align : left;
+}
+
+.material label,
+.material input[value=""] ~ label {
+	color              : #999;
+	font-size          : 1.0em;
+	font-weight        : 700;
+	position           : absolute;
+	pointer-events     : none;
+	left               : 10px;
+	top                : 18px;
+	transition         : 0.2s ease all;
+	-moz-transition    : 0.2s ease all;
+	-webkit-transition : 0.2s ease all;
+	z-index            : 2;
+}
+
+.material input:focus {
+	/*background : #FFF !important;*/
+}
+
+.material input:not(:placeholder-shown) ~ label,
+.material input:focus ~ label {
+	top            : -7px;
+	font-size      : 14px;
+	font-weight    : 700;
+	color          : #5264AE;
+	background     : transparent;
+	padding        : 0 5px;
+	text-transform : uppercase;
+}
+
+.material input:not(:placeholder-shown) ~ label:after,
+.material input:focus ~ label:after {
+	content    : " ";
+	position   : absolute;
+	top        : 3px;
+	left       : 1px;
+	height     : 50%;
+	background : #FFF;
+	display    : block;
+	width      : calc(100% - 2px);
+	z-index    : -1;
+}
+
+.material .showpass {
+	top : 15px;
+}
+
+@media (max-width : 767px) {
+	
+	.login--block {
+		border             : 0;
+		background         : transparent;
+		width              : 100vw;
+		box-shadow         : 0 0 0;
+		-webkit-box-shadow : 0 0 0;
+		-moz-box-shadow    : 0 0 0;
+	}
+	
+	.login--block .zagolovok {
+		background : transparent;
+	}
+	
+	.login--block a.blue,
+	.login--block .blue {
+		/*color : #FFF;*/
+	}
+	
+	.login--block input {
+		background : #FFF;
+	}
+	
+	.login--block input:focus {
+		background : #FFF;
+	}
+	
+	.login--block .copy {
+		padding    : 10px;
+		position   : fixed;
+		bottom     : 5px;
+		box-sizing : border-box;
+		width      : 100vw;
+	}
+	
+	.login--block div.red,
+	.login--block div.green {
+		background : rgba(250, 250, 250, 0.7);
+		padding    : 10px;
+	}
+	
+	.login--block .showpass {
+		top : 10px;
+	}
+	
+}
