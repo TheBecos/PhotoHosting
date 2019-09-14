@@ -22,10 +22,6 @@ $user = \Control::userInfo($_COOKIE['session']);
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-    <!--Sweet Alert-->
-    <link rel="stylesheet" type="text/css" href="./css/sweet-alert.css">
-    <script type="text/javascript" src="./js/sweet-alert.min.js"></script>
-
     <link rel="shortcut icon" href="./images/logo1.ico" type="image/x-icon">
 
     <script type="text/javascript" src="./js/jquery/jquery-3.1.1.min.js"></script>
@@ -49,7 +45,7 @@ $user = \Control::userInfo($_COOKIE['session']);
 </head>
 <body>
 
-<div id="message" class="message"></div>
+<div id="message" class="message" style="display: none"></div>
 
 <div id="dialog_container" class="dialog_container">
 
@@ -57,13 +53,13 @@ $user = \Control::userInfo($_COOKIE['session']);
         <img src="/images/rings.svg" border="0" width="128">
     </div>
     <div class="dialog" id="dialog" align="left">
-        <div class="close" title="Закрыть или нажмите ^ESC"><i class="icon-cancel"></i></div>
+        <div class="close" title="Закрыть или нажмите ^ESC" onclick="DClose()"><i class="icon-cancel"></i></div>
         <div id="resultdiv"></div>
     </div>
 
 </div>
 
-<div class="p0 m0">
+<div class="p0 m0 page">
 
     <div class="header">
 
@@ -99,7 +95,7 @@ $user = \Control::userInfo($_COOKIE['session']);
             </span>
 
             <span class="actions--photos hidden">
-                 <a href="javascript:void(0)" class="redbtn button deletePhoto" type="submit"
+                 <a href="javascript:void(0)" class="redbtn button" type="submit"
                     onclick="$('#photoForm').submit()">Удалить выбранные</a>
                  <a href="javascript:void(0)" class="graybtn button unselectPhoto" type="submit"">Отменить выделение</a>
             </span>
@@ -116,12 +112,50 @@ $user = \Control::userInfo($_COOKIE['session']);
 
 </div>
 
+<FORM action="backend/core/core.photos.php" method="post" enctype="multipart/form-data" name="uploadForm" class="hidden"
+      id="uploadForm">
+    <INPUT name="action" type="hidden" id="action" value="upload">
+    <INPUT name="user" type="hidden" id="user" value="<?= $user['id'] ?>">
+    <input name="file[]" type="file" class="files wp97" id="file[]" multiple onchange="$('#uploadForm').submit()">
+</FORM>
+
 <div class="setButton">
-    <a href="javascript:void(0)" onclick="configpage()" title="Обновить"><i class="icon-arrows-cw"></i></a>
-    <a href="javascript:void(0)" type="submit" onclick="doLoad('backend/forms/form.upload.php')" title="Загрузить фото">
+    <a href="javascript:void(0)" type="submit" onclick="/*doLoad('backend/forms/form.upload.php')*/$('.files').click()"
+       title="Добавить фото">
         <i class="icon-plus-circled"></i>
     </a>
+    <a href="javascript:void(0)" onclick="configpage()" title="Обновить"><i class="icon-arrows-cw"></i></a>
 </div>
+
+<script>
+
+    $('#uploadForm').ajaxForm({
+        beforeSubmit: function () {
+
+            var $out = $('#message');
+
+            $('#dialog').css('display', 'none');
+            $('#dialog_container').css('display', 'none');
+
+            $out.empty().css('display', 'block').append('<div id=loader><img src=images/loader.gif> Загрузка файлов...</div>');
+
+            return true;
+
+        },
+        success: function (data) {
+
+            $('#message').fadeTo(1, 1).css('display', 'block').html(data);
+            setTimeout(function () {
+                $('#message').fadeTo(1000, 0);
+            }, 10000);
+
+            configpage();
+
+        }
+
+    });
+
+</script>
 
 
 </body>

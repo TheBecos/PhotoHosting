@@ -77,7 +77,6 @@ $(document).on('mouseleave', '.showpass', function () {
 
 });
 
-
 /**
  * Открытие url в модальном окне. Используется для вызова форм
  * @param url
@@ -93,7 +92,7 @@ function doLoad(url) {
     $container.css('height', $(window).height());
     $dialog.css('width', '500px').css('height', 'unset').css('display', 'none');
     $container.css('display', 'block');
-    //$preloader.center().css('display', 'block');
+    $preloader.center().css('display', 'block');
 
     $.ajax({
         type: "GET",
@@ -105,10 +104,6 @@ function doLoad(url) {
 
             $dialog.css('display', 'block').center();
 
-            ShowModal.fire({
-                etype: 'dialog',
-                action: action
-            });
 
         },
         statusCode: {
@@ -135,7 +130,6 @@ function doLoad(url) {
 
 /**
  * Закрытие модального окна
- * @constructor
  */
 function DClose() {
 
@@ -151,13 +145,34 @@ function DClose() {
         'margin': 'unset'
     }).center();
 
-    if (!isMobile) {
+}
 
-        //$('body').css('overflow-y','auto');
+/**
+ * Центрирование элементов в окне
+ */
+$.fn.center = function () {
+
+    var w = $(window);
+
+    this.css("position", "absolute");
+
+    if ($(window).width() > 500) {
+
+        this.css("top", ((w.height() - this.actual('height')) / 2 - 20) + "px");
+        this.css("left", (w.width() - this.width()) / 2 + w.scrollLeft() + "px");
+
+    } else {
+
+        this.css("top", "0px");
+        this.css("left", "0px");
 
     }
 
-}
+    return this;
+
+    //}
+
+};
 
 
 /*
@@ -236,8 +251,7 @@ function configpage() {
 
     var search = $('#search').val();
 
-    $('.photos').empty().load("backend/view/list.php?action=list&user=" + user + "&search=" + search).append('<img src="images/loading.svg">');
-
+    $('.photos').empty().load("backend/view/list.php?user=" + user + "&search=" + search.replace(" ", "+")).append('<div id=loader><img src=../images/loading.svg> Загрузка фотографий...</div>');
 
 }
 
@@ -279,9 +293,43 @@ $(document).on('click', '.unselectPhoto', function () {
 });
 
 // Открытие фотографии
-$(document).on('click', '.photo', function () {
+$(document).off('click','.photo');
+$(document).on('click','.photo',function(){
 
-    alert('хай');
+    var src = $(this).attr('src');
+    var id = $(this).data('id');
+    var url = 'backend/core/core.photos.php?action=info&id=' + id;
+
+    var des='',name='';
+
+    $(".page").append('' +
+        '<div class="popup">' +
+        '   <div class="popup_bg"></div>' +
+        '   <img src="' + src + '" class="popup_img hand" id="img" onclick="$(\'.popup\').remove()">' +
+        '   <label for="img" class="title_img">' +
+        '       <div class="Bold white fs-15 pt5" id="name_img">' + name+ '</div>' +
+        '       <div class="gray-lite fs-10 pt5" id="des_img">' + des+ '</div>' +
+        '   </label>' +
+        '</div>');
+
+    $.getJSON(url, function (data) {
+
+        $('#name_img').html(data.name);
+        $('#des_img').html(data.des);
+
+    });
+
+    $(".popup").fadeIn(500);
+
+    $(".popup_bg").click(function () {
+
+        $(".popup").fadeOut(500);
+
+        setTimeout(function () {
+            $(".popup").remove();
+        }, 800);
+
+    });
 
 });
 
@@ -291,7 +339,7 @@ $(document).on('click', '.deletePhoto', function () {
     var id = $(this).data('id');
     var url = 'backend/core/core.photos.php?action=delete&select=' + id;
 
-    $('#message').empty().css('display', 'block').fadeTo(1, 1).append('<div id=loader><img src=/images/loading.svg> Выполняю...</div>');
+    $('#message').empty().css('display', 'block').fadeTo(1, 1).append('<div id=loader><img src=../images/loading.svg> Выполняю...</div>');
 
     $.getJSON(url, function (data) {
 
@@ -300,15 +348,11 @@ $(document).on('click', '.deletePhoto', function () {
         setTimeout(function () {
             $('#message').fadeTo(1000, 0);
         }, 1000);
+
         configpage();
 
     });
 
 });
 
-function Upload(){
-
-
-
-}
 

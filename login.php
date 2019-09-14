@@ -194,6 +194,7 @@ $message = '';
                 $('#loginBlock').find('div[data-result="login"]').removeClass('hidden');
 
                 setCookie('session', data.user, {expires: 1000000});
+                setCookie('password', data.password, {expires: 1000000});
 
                 setTimeout(function () {
 
@@ -210,35 +211,6 @@ $message = '';
 
         }
     });
-
-    function getUrlParameter(sParam) {
-        var sPageURL = window.location.search.substring(1),
-            sURLVariables = sPageURL.split('&'),
-            sParameterName,
-            i;
-
-        for (i = 0; i < sURLVariables.length; i++) {
-            sParameterName = sURLVariables[i].split('=');
-
-            if (sParameterName[0] === sParam) {
-                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-            }
-        }
-    }
-
-    function in_array(needle, haystack, strict) {
-
-        var found = false, key, strict = !!strict;
-
-        for (key in haystack) {
-            if ((strict && haystack[key] === needle) || (!strict && haystack[key] == needle)) {
-                found = true;
-                break;
-            }
-        }
-
-        return found;
-    }
 
 </script>
 </body>

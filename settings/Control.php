@@ -47,7 +47,7 @@ class Control
      * @param array $params
      * @return array
      */
-    public static function userAdd($params = array())
+    public static function userAdd($params = [])
     {
 
         $rootpath = realpath(__DIR__ . '/../');
@@ -88,13 +88,75 @@ class Control
 
     }
 
+    /**
+     * Возвращение информации о фотографии
+     * @param int $id
+     * @return array
+     */
+    public static function photoInfo($id)
+    {
+
+        $rootpath = realpath(__DIR__ . '/../');
+
+        require_once $rootpath . "/settings/config.php";
+        require_once $rootpath . "/settings/dbconnector.php";
+
+        $db = (isset($db)) ? $db : $GLOBALS['db'];
+        $sqlname = (isset($sqlname)) ? $sqlname : $GLOBALS['sqlname'];
+
+        $photo = $db->getRow("
+				SELECT 
+					*
+				FROM " . $sqlname . "photo_list
+				WHERE
+					id=" . $id . "
+			");
+
+        return $photo;
+
+    }
+
+    /**
+     * Редактирование описания фотографии
+     * @param int $id
+     * @param array $params
+     * @return array
+     */
+    public static function photoEdit($id, $params = [])
+    {
+
+        $rootpath = realpath(__DIR__ . '/../');
+
+        require_once $rootpath . "/settings/config.php";
+        require_once $rootpath . "/settings/dbconnector.php";
+
+        $db = (isset($db)) ? $db : $GLOBALS['db'];
+        $sqlname = (isset($sqlname)) ? $sqlname : $GLOBALS['sqlname'];
+
+        if ($id > 0) {
+
+            $db->query("UPDATE " . $sqlname . "photo_list SET ?u where id = '$id'", $params);
+
+            $response['result'] = 'Success';
+            $response['text'] = 'Данные изменены';
+
+        } else {
+
+            $response['result'] = 'Error';
+            $response['text'] = 'Фото не выбрано';
+
+        }
+
+        return $response;
+
+    }
 
     /**
      * Удаление фотографии
      * @param mixed $photos
      * @return array
      */
-    public static function deletePhoto($photos = array())
+    public static function photoDelete($photos = [])
     {
 
         $rootpath = realpath(__DIR__ . '/../');
@@ -124,7 +186,7 @@ class Control
             } else {
 
                 $response['result'] = 'Error';
-                $response['error'] = 'Фотографии не выбраны';
+                $response['text'] = 'Фотографии не выбраны';
 
             }
 
@@ -141,142 +203,5 @@ class Control
 
     }
 
-
-    /**
-     * Загрузка файлов
-     * @param string $extra - сохранение
-     * @param string $rename
-     * @return array
-     */
-    public static function upload($extra = '')
-    {
-
-        $rootpath = realpath(__DIR__ . '/../../');
-
-        require_once $rootpath . "/inc/config.php";
-        require_once $rootpath . "/inc/dbconnector.php";
-        require_once $rootpath . "/inc/func.php";
-
-
-        $uploaddir = '/upload/';
-        $extAllow = ['image/png', 'image/jpeg', 'image/x-icon', 'image/bmp'];
-        $message = [];
-
-        //print_r($_FILES);
-
-        $file = [];
-
-        //если загружается несколько файлов
-        if (is_array($_FILES['file']['name'])) {
-
-            for ($i = 0; $i < count($_FILES['file']['name']); $i++) {
-
-                if (filesize($_FILES['file']['tmp_name'][$i]) > 0) {
-
-                    $ftitle = $_FILES['file']['name'][$i];
-                    $fname = md5($ftitle . filesize($_FILES['files']['tmp_name'][$i]) . time()) . "." . end(explode(".", $ftitle));
-                    $ftype = $_FILES['file']['type'][$i];
-                    $uploadfile = $uploaddir . $fname;
-                    $ext = texttosmall(end(explode(".", $ftitle)));
-
-                    if (in_array($ext, $extAllow)) {
-
-
-                        if (move_uploaded_file($_FILES['file']['tmp_name'][$i], $uploadfile)) {
-
-                            $message[] = 'Файл ' . $ftitle . ' успешно загружен.';
-                            $file[] = [
-                                "title" => $ftitle,
-                                "name" => $fname,
-                                "type" => $ftype,
-                                "size" => filesize($_FILES['files']['tmp_name'][$i])
-                            ];
-
-                        } else $message[] = 'Ошибка при загрузке файла ' . $ftitle . ' - ' . $_FILES['file']['error'][$i];
-
-                    } else $message[] = 'Ошибка при загрузке файла ' . $ftitle . ' - Файлы такого типа не разрешено загружать.';
-
-                }
-
-            }
-
-        } //если загружается один файл
-        else {
-
-            if (filesize($_FILES['file']['tmp_name']) > 0) {
-
-                $ftitle = $_FILES['file']['name'];
-                $fname = md5($ftitle . filesize($_FILES['files']['tmp_name']) . time()) . "." . end(explode(".", $ftitle));
-                $ftype = $_FILES['file']['type'];
-                $uploadfile = $uploaddir . $fname;
-                $ext = texttosmall(end(explode(".", $ftitle)));
-
-                if (in_array($ext, $extAllow)) {
-
-                    if ((filesize($_FILES['file']['tmp_name']) / 1000000) > $maxupload) $message[] = 'Ошибка при загрузке файла ' . $ftitle . ' - Превышает допустимые размеры!';
-                    else {
-
-                        if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
-
-                            $message[] = 'Файл ' . $ftitle . ' успешно загружен.';
-                            $file[] = [
-                                "title" => $ftitle,
-                                "name" => $fname,
-                                "type" => $ftype,
-                                "size" => filesize($_FILES['files']['tmp_name'])
-                            ];
-
-                        } else $message[] = 'Ошибка при загрузке файла ' . $ftitle . ' - ' . $_FILES['file']['error'];
-
-                    }
-
-                } else $message[] = 'Ошибка при загрузке файла ' . $ftitle . ' - Файлы такого типа не разрешено загружать.';
-
-            }
-
-        }
-
-        //если загружается несколько файлов в одном поле
-        for ($i = 0; $i < count($_FILES['files']['name']); $i++) {
-
-            if (filesize($_FILES['files']['tmp_name'][$i]) > 0) {
-
-                $ftitle = $_FILES['files']['name'][$i];
-                $fname = md5($ftitle . filesize($_FILES['files']['tmp_name'][$i]) . time()) . "." . end(explode(".", $ftitle));
-                $ftype = $_FILES['files']['type'][$i];
-                $uploadfile = $uploaddir . $fname;
-                $ext = texttosmall(end(explode(".", $ftitle)));
-
-                if (in_array($ext, $extAllow)) {
-
-                        if (move_uploaded_file($_FILES['files']['tmp_name'][$i], $uploadfile)) {
-
-                            $message[] = 'Файл ' . $ftitle . ' успешно загружен.';
-                            $file[] = [
-                                "title" => $ftitle,
-                                "name" => $fname,
-                                "type" => $ftype,
-                                "size" => filesize($_FILES['files']['tmp_name'][$i])
-                            ];
-
-                        } else $message[] = 'Ошибка при загрузке файла ' . $ftitle . ' - ' . $_FILES['files']['error'][$i];
-
-
-                } else $message[] = 'Ошибка при загрузке файла ' . $ftitle . ' - Файлы такого типа не разрешено загружать.';
-
-            }
-
-        }
-
-        //print_r($message);
-
-        $response = [
-            "data" => $file,
-            "message" => $message
-        ];
-
-        return $response;
-
-    }
 
 }

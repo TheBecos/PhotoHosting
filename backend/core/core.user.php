@@ -50,7 +50,8 @@ if ($action == 'user.login') {
     print json_encode([
         "result" => $result,
         "message" => $message,
-        "user" => $user['id']
+        "user" => $user['id'],
+        "password"=>$user['password']
     ]);
 
     exit();

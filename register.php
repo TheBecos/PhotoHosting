@@ -114,6 +114,7 @@ require_once "settings/Control.php";
                     <div class="showpass">
                         <i class="icon-eye-off hand" title="Показать" id="showpass"></i>
                     </div>
+                    <div id="passstrength" class="f14 hidden"></div>
                 </div>
 
 

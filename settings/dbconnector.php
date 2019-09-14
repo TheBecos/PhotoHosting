@@ -3,6 +3,8 @@ $rootpath = realpath(__DIR__.'/../');
 
 require_once $rootpath."/vendor/class/safemysql.class.php";
 
+$scheme = isset($_SERVER['HTTP_SCHEME']) ? $_SERVER['HTTP_SCHEME'] : (((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || 443 == $_SERVER['SERVER_PORT']) ? 'https://' : 'http://');
+
 $opts = array(
 	'host'    => $dbhostname,
 	'user'    => $dbusername,

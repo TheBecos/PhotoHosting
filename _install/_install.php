@@ -5,7 +5,6 @@ error_reporting(E_ALL);
 require_once "./../settings/config.php";
 require_once "./../settings/dbconnector.php";
 
-
 /**
  * Добавляем таблицу Пользователей
  */
@@ -72,3 +71,7 @@ if ($da[0] == 0) {
 }
 
 print "Установка завершена";
+
+$scheme = isset($_SERVER['HTTP_SCHEME']) ? $_SERVER['HTTP_SCHEME'] : (((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || 443 == $_SERVER['SERVER_PORT']) ? 'https://' : 'http://');
+
+header("Location: " . $scheme . $_SERVER['HTTP_HOST'] . "/login.php");

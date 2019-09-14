@@ -4,26 +4,25 @@ $scheme = isset($_SERVER['HTTP_SCHEME']) ? $_SERVER['HTTP_SCHEME'] : (((isset($_
 
 $db = $GLOBALS['db'];
 
-if (isset($_REQUEST['action']) && ($_REQUEST['action'] == "user.login"))
-    goto a;
+$UserId=0;
 
+if (!isset($_REQUEST['action']) || ($_REQUEST['action'] != "user.login")) {
 
-if ($_COOKIE['session'] != '') {
+    if ($_COOKIE['session'] != '') {
 
-    $user = $db->getRow("SELECT * FROM " . $sqlname . "user WHERE id = " .$_COOKIE['session']);
+        $user = $db->getRow("SELECT * FROM " . $sqlname . "user WHERE id = " . $_COOKIE['session']);
 
-    if ($user['id'] > 0) {
+        if (($user['id'] > 0) && ($_COOKIE['password'] == $user['password'])) {
 
-        $UserId = $user['id'] + 0;
-        $UserName = $user['name'];
-        $UserLogin = $user['login'];
+            $UserId = $user['id'] + 0;
+            $UserName = $user['name'];
+            $UserLogin = $user['login'];
+
+        }
 
     }
 
-} else {
-
-    header("Location: " . $scheme . $_SERVER['HTTP_HOST'] . "/login.php");
+    if($UserId == 0)
+        header("Location: " . $scheme . $_SERVER['HTTP_HOST'] . "/login.php");
 
 }
-
-a:

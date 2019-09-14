@@ -11,65 +11,35 @@ include $rpath . "/settings/auth.php";
 require_once $rpath . "/settings/Control.php";
 
 $action = $_REQUEST['action'];
-//$id = $_REQUEST['id'];
+$user = $_REQUEST['user'];
+$id = $_REQUEST['id'];
+
+/*Получение сведений о фотогбифии*/
+if ($action == 'info') {
+
+    $res = \Control::photoInfo($id);
+
+    print json_encode($res);
+
+    exit();
+
+}
 
 /*Редактирование описания*/
 if ($action == 'edit') {
 
-    $params = $_REQUEST;
+    $id = $_REQUEST['id'];
 
-    //найдем разрешенный формат файлов
-    $type = \Document::typesDocument();
-    $params['ext_allow'] = $type[$params['type']]['format'];
+    $params = [
+        "name" => $_REQUEST['name'],
+        "des" => $_REQUEST['des']
+    ];
 
-    $upload = \Document::fileUpload($params);
+    $res = \Control::photoEdit($id, $params);
 
-    $params['files'] = $upload['files'];
-    $params['uploader'] = 'castomer';
+    $response = ($res['result'] == 'Success') ? $res['text'] : "Ошибка: " . $res['text'];
 
-    $mes = yimplode("<br>", $upload['message']);
-
-    if ($id == 0) {
-
-        $res = \Document::editDocument($id, $params);
-
-        \CastomerLogs::logit('903', [
-            $type[$params['type']]['title'],
-            $params['title'],
-            \Control::castomerName($CustomerID)
-        ]);
-
-    } else {
-
-        $res = \Document::editDocument($id, $params);
-
-        \CastomerLogs::logit('904', [
-            $type[$params['type']]['title'],
-            $params['title'],
-            \Control::castomerName($CustomerID)
-        ]);
-
-    }
-
-    //актуализация статуса
-    $progress = \Document::progressDocument($CustomerID);
-    if ($progress['check'] == 0)
-        $status = 0;
-    elseif ($progress['check'] < $progress['total'])
-        $status = 1;
-    elseif ($progress['check'] == $progress['total'])
-        $status = 2;
-
-    //устанавливаем новый статус
-    $change = \Document::statusDocumentChange($CustomerID, ["status" => $status]);
-
-    $error = (count($upload['error']) > 0) ? yimplode("<br>", $upload['error']) : null;
-
-    print json_encode_cyr(array(
-        "result" => ($res['result']) ? $res['result'] : null,
-        "error" => $error,
-        "message" => $mes
-    ));
+    print $response;
 
     exit();
 
@@ -80,18 +50,18 @@ if ($action == 'delete') {
 
     $photos = $_REQUEST['select'];
 
-    $res = \Control::deletePhoto($photos);
+    $res = \Control::photoDelete($photos);
 
-    print json_encode(array(
-        "result" => ($res['result']) ? $res['result'] : null,
-        "text" => $res['text']
-    ));
+    print json_encode([
+        "result" => $res['result'],
+        "text" => $res['text'],
+    ]);
 
     exit();
 
 }
 
-/*Удаление фотографий*/
+/*Загрузка фотографий*/
 if ($action == 'upload') {
 
     $file = [];
@@ -101,35 +71,45 @@ if ($action == 'upload') {
     $dir = '../../upload/';
 
     // Разрешенные форматы файлов
-    $allow = ['image/jpeg', 'image/png', 'image/x-icon', 'image/bmp'];
+    $allow = ['image/jpeg', 'image/png', 'image/x-icon', 'image/bmp', 'image/gif'];
 
     if (isset($_FILES['file'])) {
+
         // Проверим директорию для загрузки.
         if (!is_dir($dir)) {
             mkdir($dir, 0777, true);
         }
 
-        // Преобразуем массив $_FILES в удобный вид для перебора в foreach.
+        // Преобразуем массив $_FILES в удобный вид
         $files = [];
+
         $diff = count($_FILES['file']) - count($_FILES['file'], COUNT_RECURSIVE);
+
         if ($diff == 0) {
+
+            // Загружен 1 файл
             $files = [$_FILES['file']];
+
         } else {
+
             foreach ($_FILES['file'] as $k => $l) {
                 foreach ($l as $i => $v) {
                     $files[$i][$k] = $v;
                 }
             }
+
         }
 
         $countFiles = count($files);
         $currFiles = 0;
 
+        // Обходим массив загруженных файлов
         foreach ($files as $file) {
 
             $error = $success = '';
+            $id = 0;
 
-            // Проверим на ошибки загрузки.
+            // Проверим на ошибки загрузки
             if (!empty($file['error']) || empty($file['tmp_name'])) {
 
                 switch (@$file['error']) {
@@ -172,6 +152,7 @@ if ($action == 'upload') {
             } elseif ($file['tmp_name'] == 'none' || !is_uploaded_file($file['tmp_name'])) {
                 $error = 'Не удалось загрузить файл.';
             } else {
+
                 // Оставляем в имени файла только буквы, цифры и некоторые символы.
                 $pattern = "[^a-zа-яё0-9,~!@#%^-_\$\?\(\)\{\}\[\]\.]";
                 $name = mb_eregi_replace($pattern, '-', $file['name']);
@@ -188,7 +169,6 @@ if ($action == 'upload') {
                         // Перемещаем файл в директорию.
                         if (move_uploaded_file($file['tmp_name'], $dir . $name)) {
 
-                            // Далее можно сохранить название файла в БД и т.п.
                             $success = 'Файл «' . $name . '» успешно загружен.';
                             ++$currFiles;
 
@@ -199,13 +179,27 @@ if ($action == 'upload') {
                         }
                     } else {
 
-                        $success = 'Файл уже существует';
+                        // Если файл уже имеется на сервере
+                        $success = 'Файл «' . $name . '» успешно загружен.';
                         ++$currFiles;
+
+                        // Получим id файла из таблицы с файлами
+                        $id = $db->getOne("SELECT id FROM " . $sqlname . "files WHERE file = '" . $name . "'");
 
                     }
 
+                    // Сохраняем данные о файле в БД
+                    if ($id == 0) {
+
+                        $db->query("INSERT INTO " . $sqlname . "files SET ?u", ['file' => $name, 'format' => $file['type']]);
+                        $id = $db->insertId();
+
+                    }
                 }
             }
+
+            if ($id > 0)
+                $db->query("INSERT INTO " . $sqlname . "photo_list SET ?u", ['fid' => $id, 'iduser' => $user]);
 
             $response = (!empty($success)) ? $success : $error;
 
