@@ -15,7 +15,7 @@ class Control
     public static function infoUser($id, $login = '')
     {
 
-        $rootpath = realpath(__DIR__ . '/../');
+        $rootpath = realpath(__DIR__ . '/PhotoHosting/');
 
         require_once $rootpath . "/settings/config.php";
         require_once $rootpath . "/settings/dbconnector.php";
@@ -50,7 +50,7 @@ class Control
     public static function addUser($params = [])
     {
 
-        $rootpath = realpath(__DIR__ . '/../');
+        $rootpath = realpath(__DIR__ . '/PhotoHosting/');
 
         require_once $rootpath . "/settings/config.php";
         require_once $rootpath . "/settings/dbconnector.php";
@@ -95,7 +95,7 @@ class Control
     public static function infoPhoto($id)
     {
 
-        $rootpath = realpath(__DIR__ . '/../');
+        $rootpath = realpath(__DIR__ . '/PhotoHosting/');
 
         require_once $rootpath . "/settings/config.php";
         require_once $rootpath . "/settings/dbconnector.php";
@@ -124,7 +124,7 @@ class Control
     public static function editPhoto($id, $params = [])
     {
 
-        $rootpath = realpath(__DIR__ . '/../');
+        $rootpath = realpath(__DIR__ . '/PhotoHosting/');
 
         require_once $rootpath . "/settings/config.php";
         require_once $rootpath . "/settings/dbconnector.php";
@@ -158,7 +158,7 @@ class Control
     public static function deletePhoto($photos = [])
     {
 
-        $rootpath = realpath(__DIR__ . '/../');
+        $rootpath = realpath(__DIR__ . '/PhotoHosting/');
 
         require_once $rootpath . "/settings/config.php";
         require_once $rootpath . "/settings/dbconnector.php";
