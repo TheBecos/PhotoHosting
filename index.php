@@ -8,7 +8,7 @@ include "settings/auth.php";
 
 require_once "settings/Control.php";
 
-$user = \Control::userInfo($_COOKIE['session']);
+$user = \Control::infoUser($_COOKIE['session']);
 
 ?>
 <!DOCTYPE html>
@@ -112,7 +112,7 @@ $user = \Control::userInfo($_COOKIE['session']);
 
 </div>
 
-<FORM action="backend/core/core.photos.php" method="post" enctype="multipart/form-data" name="uploadForm" class="hidden"
+<FORM action="backend/core/photos.php" method="post" enctype="multipart/form-data" name="uploadForm" class="hidden"
       id="uploadForm">
     <INPUT name="action" type="hidden" id="action" value="upload">
     <INPUT name="user" type="hidden" id="user" value="<?= $user['id'] ?>">

@@ -298,7 +298,7 @@ $(document).on('click','.photo',function(){
 
     var src = $(this).attr('src');
     var id = $(this).data('id');
-    var url = 'backend/core/core.photos.php?action=info&id=' + id;
+    var url = 'backend/core/photos.php?action=info&id=' + id;
 
     var des='',name='';
 
@@ -337,7 +337,7 @@ $(document).on('click','.photo',function(){
 $(document).on('click', '.deletePhoto', function () {
 
     var id = $(this).data('id');
-    var url = 'backend/core/core.photos.php?action=delete&select=' + id;
+    var url = 'backend/core/photos.php?action=delete&select=' + id;
 
     $('#message').empty().css('display', 'block').fadeTo(1, 1).append('<div id=loader><img src=../images/loading.svg> Выполняю...</div>');
 

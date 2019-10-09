@@ -176,8 +176,16 @@ label[for] {
     height: 5vh;
 }
 
+.grid .grid-item:hover .custom-checkbox {
+    visibility: visible;
+}
+
 .selPhoto:checked ~ .visor {
     height: 5vh;
+}
+
+.selPhoto:checked ~ .custom-checkbox {
+    visibility: visible;
 }
 
 .add-btn-photo {
@@ -193,45 +201,44 @@ label[for] {
     -moz-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0) !important;
 }
 
-.add-btn-photo:hover {
+.add-btn-photo hover {
     background: var(--green-sublite) !important;
 }
 
 /*Просмотр фотографии*/
-
 .popup {
 
-    position   : fixed;
-    height     : 100vh;
-    width      : 100vw;
-    top        : 0;
-    left       : 0;
-    display    : none;
-    text-align : center;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    display: none;
+    text-align: center;
 
 }
 
 .popup_bg {
 
-    background : rgba(0, 0, 0, 0.7);
-    position   : absolute;
-    z-index    : 70;
-    height     : 100%;
-    width      : 100%;
+    background: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    z-index: 70;
+    height: 100%;
+    width: 100%;
 
 }
 
 .popup_img {
 
-    position   : relative;
-    margin-top : 3%;
-    z-index    : 100;
-    max-height : 90vh;
-    max-width  : 90vw;
+    position: relative;
+    margin-top: 3%;
+    z-index: 100;
+    max-height: 90vh;
+    max-width: 90vw;
 
 }
 
-.title_img{
+.title_img {
 
     z-index: 100;
     position: relative;

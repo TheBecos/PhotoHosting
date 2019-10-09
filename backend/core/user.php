@@ -14,9 +14,9 @@ $action = $_REQUEST['action'];
 $id = $_REQUEST['id'];
 $login = $_REQUEST['login'];
 
-if ($action == 'user.edit') {
+if ($action == 'editUser') {
 
-    $res = \Control::userAdd($_REQUEST);
+    $res = \Control::addUser($_REQUEST);
 
     print json_encode($res);
 
@@ -24,9 +24,9 @@ if ($action == 'user.edit') {
 
 }
 
-if ($action == 'user.login') {
+if ($action == 'login') {
 
-    $user = \Control::userInfo(0, $login);
+    $user = \Control::infoUser(0, $login);
 
     $result = '';
 

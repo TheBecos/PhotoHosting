@@ -18,7 +18,7 @@ if ($da[0] == 0) {
           `password` varchar(250) NOT NULL COMMENT 'Пароль',
           `name` varchar(250) DEFAULT NULL COMMENT 'Имя пользователя',
         PRIMARY KEY (`id`),
-        KEY `title` (`title`)
+        KEY `name` (`name`)
 	) 
 	COMMENT='База пользователей' 
 	COLLATE='utf8_general_ci'

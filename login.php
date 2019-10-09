@@ -60,9 +60,9 @@ $message = '';
 
         <div id="loginBlock" class="login--form">
 
-            <form action="backend/core/core.user.php" method="post" id="loginform" name="loginform"
+            <form action="backend/core/user.php" method="post" id="loginform" name="loginform"
                   enctype="multipart/form-data">
-                <input type="hidden" id="action" name="action" value="user.login">
+                <input type="hidden" id="action" name="action" value="login">
 
                 <div class="div-center blue mb20">
                     <h2 class="gray2">Авторизация</h2>

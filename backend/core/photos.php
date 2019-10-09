@@ -11,13 +11,13 @@ include $rpath . "/settings/auth.php";
 require_once $rpath . "/settings/Control.php";
 
 $action = $_REQUEST['action'];
-$user = $_REQUEST['user'];
-$id = $_REQUEST['id'];
 
 /*Получение сведений о фотогбифии*/
 if ($action == 'info') {
 
-    $res = \Control::photoInfo($id);
+    $id = $_REQUEST['id'];
+
+    $res = \Control::infoPhoto($id);
 
     print json_encode($res);
 
@@ -35,7 +35,7 @@ if ($action == 'edit') {
         "des" => $_REQUEST['des']
     ];
 
-    $res = \Control::photoEdit($id, $params);
+    $res = \Control::editPhoto($id, $params);
 
     $response = ($res['result'] == 'Success') ? $res['text'] : "Ошибка: " . $res['text'];
 
@@ -50,7 +50,7 @@ if ($action == 'delete') {
 
     $photos = $_REQUEST['select'];
 
-    $res = \Control::photoDelete($photos);
+    $res = \Control::deletePhoto($photos);
 
     print json_encode([
         "result" => $res['result'],
@@ -63,6 +63,8 @@ if ($action == 'delete') {
 
 /*Загрузка фотографий*/
 if ($action == 'upload') {
+
+    $user = $_REQUEST['user'];
 
     $file = [];
     $response = "";

@@ -15,7 +15,7 @@ $search = "";
 /**
  * Список фотографий пользователя
  */
-if ($word != '')  $search .= " AND ((" . $sqlname . "photo_list.name LIKE '%" . $word . "%') OR (" . $sqlname . "photo_list.des LIKE '%" . $word . "%'))";
+if ($word != '') $search .= " AND ((" . $sqlname . "photo_list.name LIKE '%" . $word . "%') OR (" . $sqlname . "photo_list.des LIKE '%" . $word . "%'))";
 
 if ($user > 0)
     $search .= " AND " . $sqlname . "photo_list.iduser = " . $user;
@@ -41,7 +41,7 @@ $list = $db->getAll($q);
 
 ?>
 
-<form action="backend/core/core.photos.php" method="post" id="photoForm" name="photoForm" enctype="multipart/form-data">
+<form action="backend/core/photos.php" method="post" id="photoForm" name="photoForm" enctype="multipart/form-data">
 
     <div class="grid">
 
@@ -56,7 +56,8 @@ $list = $db->getAll($q);
 
                 <div class="checkbox">
                     <label>
-                        <input name="select[]" type="checkbox" id="select[]" class="selPhoto" value="<?= $photo['id'] ?>">
+                        <input name="select[]" type="checkbox" id="select[]" class="selPhoto"
+                               value="<?= $photo['id'] ?>">
                         <span class="custom-checkbox"><i class="icon-ok"></i></span>
                     </label>
                 </div>
@@ -69,7 +70,7 @@ $list = $db->getAll($q);
                     <span class="actions" style="float: right">
                         <a href="javascript:void(0)" data-id="<?= $photo['id'] ?>" title="Изменить"
                            class="gray editPhoto"
-                           onclick="doLoad('backend/forms/form.edit.php?id=<?= $photo['id'] ?>')"><i
+                           onclick="doLoad('backend/forms/edit.php?id=<?= $photo['id'] ?>')"><i
                                     class="icon-pencil green"></i></a>
                         <a href="javascript:void(0)" data-id="<?= $photo['id'] ?>" title="Удалить"
                            class="gray deletePhoto"><i class="icon-cancel-circled red"></i></a>
@@ -80,7 +81,7 @@ $list = $db->getAll($q);
 
         <?php } ?>
 
-        <label class="grid-item" style="width: 97vw; height: 10vh"></label>
+        <label class="fs-15" style="width: 97vw; height: 10vh"><?php if (count($list) <= 0) print 'Фотографии отсутствуют' ?></label>
 
     </div>
 </form>

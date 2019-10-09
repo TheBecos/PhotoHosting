@@ -128,7 +128,6 @@ i {
     display: block !important;
 }
 
-
 .left-text,
 .text-left {
     text-align: left;
@@ -463,6 +462,25 @@ textarea:focus:invalid {
     border-bottom: 1px solid #E74C3C;
 }
 
+.message {
+    position              : fixed;
+    max-width             : 250px;
+    top                   : 1px;
+    right                 : 50px;
+    display               : inline-block;
+    font-size             : 1.0em;
+    padding               : 5px;
+    z-index               : 100000;
+    color                 : #FFF;
+    /*background:#2980B9;*/
+    background            : #3498DB;
+    -moz-border-radius    : 1px;
+    -webkit-border-radius : 1px;
+    border-radius         : 1px;
+    opacity               : .95;
+    cursor                : pointer;
+}
+
 /*Модальное окно*/
 .dialog_container {
     position: fixed;
@@ -473,12 +491,6 @@ textarea:focus:invalid {
     background: #222;
     width: 100vw;
     height: 100vh;
-    background: -moz-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.4) 0, rgba(0, 0, 0, 0.9) 100%);
-    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(0, 0, 0, 0.4)), color-stop(100%, rgba(0, 0, 0, 0.9)));
-    background: -webkit-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.4) 0, rgba(0, 0, 0, 0.9) 100%);
-    background: -o-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.4) 0, rgba(0, 0, 0, 0.9) 100%);
-    background: -ms-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.4) 0, rgba(0, 0, 0, 0.9) 100%);
-    background: radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.4) 0, rgba(0, 0, 0, 0.9) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#66000000', endColorstr='#e6000000', GradientType=1);
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
     filter: alpha(opacity=50);
@@ -1293,12 +1305,3 @@ input[type="checkbox"] {
 .checkbox input[type="checkbox"]:checked + .custom-checkbox .icon-ok {
     transform: scale(1);
 }
-
-.selPhoto:checked ~ .custom-checkbox {
-    visibility: visible;
-}
-
-.grid .grid-item:hover .custom-checkbox {
-    visibility: visible;
-}
-

@@ -12,7 +12,7 @@ class Control
      * @param string $login
      * @return array
      */
-    public static function userInfo($id, $login = '')
+    public static function infoUser($id, $login = '')
     {
 
         $rootpath = realpath(__DIR__ . '/../');
@@ -47,14 +47,13 @@ class Control
      * @param array $params
      * @return array
      */
-    public static function userAdd($params = [])
+    public static function addUser($params = [])
     {
 
         $rootpath = realpath(__DIR__ . '/../');
 
         require_once $rootpath . "/settings/config.php";
         require_once $rootpath . "/settings/dbconnector.php";
-        require_once $rootpath . "/settings/func.php";
 
         $db = (isset($db)) ? $db : $GLOBALS['db'];
         $sqlname = (isset($sqlname)) ? $sqlname : $GLOBALS['sqlname'];
@@ -93,7 +92,7 @@ class Control
      * @param int $id
      * @return array
      */
-    public static function photoInfo($id)
+    public static function infoPhoto($id)
     {
 
         $rootpath = realpath(__DIR__ . '/../');
@@ -122,7 +121,7 @@ class Control
      * @param array $params
      * @return array
      */
-    public static function photoEdit($id, $params = [])
+    public static function editPhoto($id, $params = [])
     {
 
         $rootpath = realpath(__DIR__ . '/../');
@@ -156,7 +155,7 @@ class Control
      * @param mixed $photos
      * @return array
      */
-    public static function photoDelete($photos = [])
+    public static function deletePhoto($photos = [])
     {
 
         $rootpath = realpath(__DIR__ . '/../');
@@ -173,12 +172,9 @@ class Control
             //Проверяем наличие входных параметров, в случае успеха - удаляем фото
             if (count($photos) > 0) {
 
+                $photos = "'" . implode("','", $photos) . "'";
 
-                foreach ($photos as $photo) {
-
-                    $db->query("delete from " . $sqlname . "photo_list WHERE id = '$photo'");
-
-                }
+                $response = $db -> query("delete from " . $sqlname . "photo_list WHERE id IN (" . $photos . ")");
 
                 $response['result'] = 'Success';
                 $response['text'] = 'Фото удалены';

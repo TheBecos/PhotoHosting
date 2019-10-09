@@ -2,11 +2,9 @@
 
 include "settings/config.php";
 include "settings/dbconnector.php";
-//include "settings/settings.php";
-include "settings/func.php";
-
 
 require_once "settings/Control.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -78,9 +76,9 @@ require_once "settings/Control.php";
 
         <div class="logo"><img src="images/logo.png" height="50"></div>
 
-        <form action="backend/core/core.user.php" method="post" id="regform" name="regform"
+        <form action="backend/core/user.php" method="post" id="regform" name="regform"
               enctype="multipart/form-data">
-            <input type="hidden" id="action" name="action" value="user.edit">
+            <input type="hidden" id="action" name="action" value="editUser">
 
             <a href="login.php" class="pt5" style="font-size: 11pt">
                 <i class="icon-left"></i>Авторизация

@@ -8,14 +8,14 @@ $id = $_REQUEST['id'];
 
 if ($id > 0) {
 
-    $photo = \Control::photoInfo($id);
+    $photo = \Control::infoPhoto($id);
 
 }
 
 
 ?>
     <div class="zagolovok"><b>Редактирование описания</b></div>
-    <FORM method="post" action="backend/core/core.photos.php" name="formEdit" id="formEdit">
+    <FORM method="post" action="backend/core/photos.php" name="formEdit" id="formEdit">
         <INPUT name="action" id="action" type="hidden" value="edit">
         <INPUT name="id" id="id" type="hidden" value="<?= $id ?>">
 
