@@ -1,5 +1,9 @@
 <?php
 
+
+require_once "config.php";
+require_once "dbconnector.php";
+
 /**
  * Class Control
  */
@@ -14,12 +18,6 @@ class Control
      */
     public static function infoUser($id, $login = '')
     {
-        /*$rootpath = realpath(__DIR__ . '/PhotoHosting');
-        require_once $rootpath . "/settings/config.php";
-        require_once $rootpath . "/settings/dbconnector.php";*/
-
-        require_once "config.php";
-        require_once "dbconnector.php";
 
         $db = (isset($db)) ? $db : $GLOBALS['db'];
         $sqlname = (isset($sqlname)) ? $sqlname : $GLOBALS['sqlname'];
@@ -50,13 +48,6 @@ class Control
      */
     public static function addUser($params = [])
     {
-
-        /*$rootpath = realpath(__DIR__ . '/PhotoHosting');
-        require_once $rootpath . "/settings/config.php";
-        require_once $rootpath . "/settings/dbconnector.php";*/
-
-        require_once "config.php";
-        require_once "dbconnector.php";
 
         $db = (isset($db)) ? $db : $GLOBALS['db'];
         $sqlname = (isset($sqlname)) ? $sqlname : $GLOBALS['sqlname'];
@@ -98,11 +89,6 @@ class Control
     public static function infoPhoto($id)
     {
 
-        $rootpath = realpath(__DIR__ . '/PhotoHosting/');
-
-        require_once $rootpath . "/settings/config.php";
-        require_once $rootpath . "/settings/dbconnector.php";
-
         $db = (isset($db)) ? $db : $GLOBALS['db'];
         $sqlname = (isset($sqlname)) ? $sqlname : $GLOBALS['sqlname'];
 
@@ -126,11 +112,6 @@ class Control
      */
     public static function editPhoto($id, $params = [])
     {
-
-        /*$rootpath = realpath(__DIR__ . '/PhotoHosting/');
-
-        require_once $rootpath . "/settings/config.php";
-        require_once $rootpath . "/settings/dbconnector.php";*/
 
         $db = (isset($db)) ? $db : $GLOBALS['db'];
         $sqlname = (isset($sqlname)) ? $sqlname : $GLOBALS['sqlname'];
@@ -160,11 +141,6 @@ class Control
      */
     public static function deletePhoto($photos = [])
     {
-
-        $rootpath = realpath(__DIR__ . '/PhotoHosting/');
-
-        require_once $rootpath . "/settings/config.php";
-        require_once $rootpath . "/settings/dbconnector.php";
 
         $db = (isset($db)) ? $db : $GLOBALS['db'];
         $sqlname = (isset($sqlname)) ? $sqlname : $GLOBALS['sqlname'];

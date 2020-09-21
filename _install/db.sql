@@ -16,8 +16,8 @@ CREATE DATABASE IF NOT EXISTS `PhotoGallery` /*!40100 DEFAULT CHARACTER SET utf8
 USE `PhotoGallery`;
 
 -- Дамп структуры для таблицы PhotoGallery.app_photo_list
-DROP TABLE IF EXISTS `app_photo_list`;
-CREATE TABLE IF NOT EXISTS `app_photo_list` (
+DROP TABLE IF EXISTS `photo_list`;
+CREATE TABLE IF NOT EXISTS `photo_list` (
   `id` int(30) NOT NULL AUTO_INCREMENT,
   `datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'дата добавления',
   `name` varchar(255) DEFAULT NULL COMMENT 'заголовок к фото',
@@ -29,8 +29,8 @@ CREATE TABLE IF NOT EXISTS `app_photo_list` (
 
 
 -- Дамп структуры для таблицы PhotoGallery.app_files
-DROP TABLE IF EXISTS `app_files`;
-CREATE TABLE IF NOT EXISTS `app_files` (
+DROP TABLE IF EXISTS `files`;
+CREATE TABLE IF NOT EXISTS `files` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'дата добавления',
   `file` varchar(255) DEFAULT NULL COMMENT 'имя файла на диске',
@@ -40,16 +40,13 @@ CREATE TABLE IF NOT EXISTS `app_files` (
 
 
 -- Дамп структуры для таблицы PhotoGallery.app_user
-DROP TABLE IF EXISTS `app_user`;
-CREATE TABLE IF NOT EXISTS `app_user` (
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `login` varchar(250) NOT NULL COMMENT 'Логин',
   `password` varchar(250) NOT NULL COMMENT 'Пароль',
   `name` varchar(250) DEFAULT NULL COMMENT 'Имя',
-  `email` TEXT NOT NULL COMMENT 'Email',
-  `avatar` varchar(100) NOT NULL COMMENT 'аватар',
-  PRIMARY KEY (`id`),
-  KEY `title` (`title`)
+  PRIMARY KEY (`id`)photogallery
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='База пользователей';
 
 

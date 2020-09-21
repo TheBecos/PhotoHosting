@@ -6,7 +6,6 @@ $rpath = realpath(__DIR__ . '/../..');
 
 include "../../settings/config.php";
 include "../../settings/dbconnector.php";
-//include $rpath."/settings/auth.php";
 
 require_once "../../settings/Control.php";
 
@@ -42,6 +41,7 @@ if ($action == 'login') {
 
     } else {
 
+        //print $_REQUEST['password'].'---'.$user['password'];
         $result = 'Error';
         $message = 'Неверный Логин / Пароль';
 
