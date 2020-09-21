@@ -14,11 +14,12 @@ class Control
      */
     public static function infoUser($id, $login = '')
     {
-
-        $rootpath = realpath(__DIR__ . '/PhotoHosting/');
-
+        /*$rootpath = realpath(__DIR__ . '/PhotoHosting');
         require_once $rootpath . "/settings/config.php";
-        require_once $rootpath . "/settings/dbconnector.php";
+        require_once $rootpath . "/settings/dbconnector.php";*/
+
+        require_once "config.php";
+        require_once "dbconnector.php";
 
         $db = (isset($db)) ? $db : $GLOBALS['db'];
         $sqlname = (isset($sqlname)) ? $sqlname : $GLOBALS['sqlname'];
@@ -50,10 +51,12 @@ class Control
     public static function addUser($params = [])
     {
 
-        $rootpath = realpath(__DIR__ . '/PhotoHosting/');
-
+        /*$rootpath = realpath(__DIR__ . '/PhotoHosting');
         require_once $rootpath . "/settings/config.php";
-        require_once $rootpath . "/settings/dbconnector.php";
+        require_once $rootpath . "/settings/dbconnector.php";*/
+
+        require_once "config.php";
+        require_once "dbconnector.php";
 
         $db = (isset($db)) ? $db : $GLOBALS['db'];
         $sqlname = (isset($sqlname)) ? $sqlname : $GLOBALS['sqlname'];
@@ -62,7 +65,7 @@ class Control
         $user['name'] = $params['name'];
         $user['password'] = password_hash($params['password'], PASSWORD_BCRYPT);
 
-        //Проверяем ни наличие пользователя с таким логином
+        //Проверяем на наличие пользователя с таким логином
         $userOld = $db->getRow("SELECT id,name FROM " . $sqlname . "user WHERE login = '" . $user["login"] . "'");
 
         if ($userOld['id'] > 0) {
@@ -124,10 +127,10 @@ class Control
     public static function editPhoto($id, $params = [])
     {
 
-        $rootpath = realpath(__DIR__ . '/PhotoHosting/');
+        /*$rootpath = realpath(__DIR__ . '/PhotoHosting/');
 
         require_once $rootpath . "/settings/config.php";
-        require_once $rootpath . "/settings/dbconnector.php";
+        require_once $rootpath . "/settings/dbconnector.php";*/
 
         $db = (isset($db)) ? $db : $GLOBALS['db'];
         $sqlname = (isset($sqlname)) ? $sqlname : $GLOBALS['sqlname'];
